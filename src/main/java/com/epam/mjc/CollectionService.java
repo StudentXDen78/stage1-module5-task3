@@ -1,27 +1,30 @@
 package com.epam.mjc;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class CollectionService {
 
     public List<Integer> filterEvenNumbers(List<Integer> list) {
-        throw new UnsupportedOperationException("You should implement this method.");
+        Stream<Integer> evenNumbers = list.stream().filter(number -> number % 2 == 0);
+        return new ArrayList<>(evenNumbers.toList());
     }
 
     public List<String> toUpperCaseCollection(List<String> list) {
-        throw new UnsupportedOperationException("You should implement this method.");
+        Stream<String> inUpperCase = list.stream().map(String::toUpperCase);
+        return new ArrayList<>(inUpperCase.toList());
     }
 
     public Optional<Integer> findMax(List<Integer> list) {
-        throw new UnsupportedOperationException("You should implement this method.");
+        return list.stream().max(Integer::compareTo);
     }
 
     public Optional<Integer> findMin(List<List<Integer>> list) {
-        throw new UnsupportedOperationException("You should implement this method.");
+         return list.stream().flatMap(List::stream).min(Integer::compareTo);
     }
 
     public Integer sum(List<Integer> list) {
-        throw new UnsupportedOperationException("You should implement this method.");
+        Optional<Integer> res = list.stream().reduce(Integer::sum);
+        return res.orElse(null);
     }
 }
